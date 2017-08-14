@@ -242,7 +242,11 @@ var Graph = React.createClass({
             .attr("class", "file")
             .attr("r", 30)
             .attr("fill", function (d) {
-                return "#a5abb6";
+                var fill = "#a5abb6"
+                if(d.name === "Webonise") {
+                    fill = "green"
+                }
+                return fill;
             })
             .attr("stroke", "#a5abb6");
         files
