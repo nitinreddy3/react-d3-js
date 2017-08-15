@@ -1,4 +1,4 @@
-require('./theme/stylesheets/main.sass');
+require('./theme/main.sass');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graph from './javascript/components/Graph';
@@ -13,7 +13,7 @@ const Root = React.createClass({
         return (
             <div id='mainContainer'>
                 <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-                    <Route name='GraphWrapper' path='/graph-d3' component={GraphWrapper}>
+                    <Route name='GraphWrapper' path='/' component={GraphWrapper}>
                         <IndexRoute component={Graph}/>
                     </Route>
                     <Route path="/my-profile" component={Profile}></Route>
