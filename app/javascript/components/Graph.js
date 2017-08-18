@@ -9,7 +9,8 @@ class Graph extends React.Component {
             result: {
                 organisation: {
                     name: "Webonise",
-                    id: 1
+                    id: 1,
+                    children: [{ name: "my child"}, {name: "nkr"}]
                 },
                 user: {
                     id: 12,
@@ -19,24 +20,31 @@ class Graph extends React.Component {
                 },
                 departments: [{
                     id: 2,
-                    name: "GIS"
+                    name: "GIS",
+                    children: [{ name: "kumar"}, { name: "kr"}]
                 },
                 {
                     id: 3,
-                    name: "HR"
+                    name: "HR",
+                    children: [{ name: "mar"}, { name: "nkr"}]                    
                 },
                 {
                     id: 4,
-                    name: "Management"
+                    name: "Management",
+                    children: [{ name: "umar"}, { name: "gkr"}]                    
                 },
                 {
                     id: 5,
-                    name: "Finance"
+                    name: "Finance",
+                    children: [{ name: "kumsdfsdar"}, { name: "sdfr"}]                    
                 }, {
                     id: 6,
-                    name: "Sales"
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
                 }]
-            }
+            },
+            selectedUserChild: [],
+            selectedDepChild: [] 
         }
         this.createGraph = this.createGraph.bind(this);
         /**
@@ -77,7 +85,7 @@ class Graph extends React.Component {
     }
 
     createGraph() {
-        var width = 1140,
+        var width = 900,
             height = 900;
 
         debugger
@@ -139,8 +147,14 @@ class Graph extends React.Component {
             .append("circle")
             .attr("class", "file")
             .attr("r", 50)
-            .attr("stroke", "#a5abb6");
-        
+            .attr("stroke", "#a5abb6")
+            .on("click", (d) => {
+                if(d.name == "Webonise") {
+                   this.setState({ selectedUserChild: d.children });                
+                } else {
+                    this.setState({ selectedDepChild: d.children });
+                }
+            })
         files
             .append("foreignObject")
             .text((d) => d.name)
@@ -171,9 +185,6 @@ class Graph extends React.Component {
                 return urlPath
             })
             .attr("clip-path", "url(#clip-circle)")
-            .on("click", () => {
-                this.context.router.push('/home')
-            })
         
         force.start();
 
@@ -236,7 +247,29 @@ class Graph extends React.Component {
     render() {
         return (
             <div className="container">
-                <div id="theVizness"></div>
+                <div className="row">
+                    <div className="col-md-8">
+                        <div id="theVizness"></div>
+                    </div>
+                    <div className="col-md-2">
+                        <ul>
+                            {_.map(this.state.selectedUserChild, (listItem, i) => {
+                                return (<li key={i}>
+                                    {listItem.name}
+                                </li>)
+                            })}
+                        </ul>
+                    </div>
+                    <div className="col-md-2">
+                        <ul>
+                            {_.map(this.state.selectedDepChild, (listItem, i) => {
+                                return (<li key={i}>
+                                    {listItem.name}
+                                </li>)
+                            })}
+                        </ul>
+                    </div>
+                </div>
             </div>
         )
     }
