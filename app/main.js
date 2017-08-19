@@ -2,6 +2,7 @@ require('./theme/main.sass');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Graph from './javascript/components/Graph';
+import GraphExchange from './javascript/components/GraphExchange';
 import GraphWrapper from './javascript/components/GraphWrapper';
 import Profile from './javascript/components/Profile';
 import {useRouterHistory, Router, Route, IndexRoute} from 'react-router';
@@ -16,7 +17,7 @@ const Root = React.createClass({
                     <Route name='GraphWrapper' path='/' component={GraphWrapper}>
                         <IndexRoute component={Graph}/>
                     </Route>
-                    <Route path="/my-profile" component={Profile}></Route>
+                    <Route path="/graph-exchange" component={GraphExchange}></Route>
                 </Router>
             </div>
         );
