@@ -16,31 +16,36 @@ class GraphExchange extends React.Component {
                     id: 12,
                     name: "Nitin Reddy",
                     department: "Sales",
-                    profileImage: "https://avatars0.githubusercontent.com/u/6252327?v=4&s=460"
+                    profileImage: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAfZAAAAJGYwOTc3NTQ5LTBiMjEtNDA5MC05YWUyLTAyNGIzMzE2MmY1Zg.jpg"
                 },
                 departments: [{
                     id: 2,
                     name: "GIS",
-                    children: [{ name: "kumar"}, { name: "kr"}]
+                    children: [{ name: "kumar"}, { name: "kr"}],
+                    profileImage: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAfZAAAAJGYwOTc3NTQ5LTBiMjEtNDA5MC05YWUyLTAyNGIzMzE2MmY1Zg.jpg"
                 },
                 {
                     id: 3,
                     name: "HR",
-                    children: [{ name: "mar"}, { name: "nkr"}]                    
+                    children: [{ name: "mar"}, { name: "nkr"}],
+                    profileImage: "https://avatars3.githubusercontent.com/u/2829600?v=4&s=460"                    
                 },
                 {
                     id: 4,
                     name: "Management",
-                    children: [{ name: "umar"}, { name: "gkr"}]                    
+                    children: [{ name: "umar"}, { name: "gkr"}],
+                    profileImage: "https://avatars2.githubusercontent.com/u/110953?v=4&s=460"                    
                 },
                 {
                     id: 5,
                     name: "Finance",
-                    children: [{ name: "kumsdfsdar"}, { name: "sdfr"}]                    
+                    children: [{ name: "kumsdfsdar"}, { name: "sdfr"}],
+                    profileImage: "https://avatars2.githubusercontent.com/u/119893?v=4&s=460"                    
                 }, {
                     id: 6,
                     name: "Sales",
-                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}],
+                    profileImage: "https://avatars0.githubusercontent.com/u/6252327?v=4&s=460"                    
                 }]
             },
             selectedUserChild: [],
@@ -67,9 +72,7 @@ class GraphExchange extends React.Component {
         _.each(result.departments, (department) => {
             department.id = department.id;
             department.name = department.name;
-            if (department.name == result.user.department) {
-                department.src = result.user.profileImage
-            }
+            department.src = department.profileImage
             nodes.push(department)
         })
         links = _.map(result.departments, (department, i) => {
@@ -87,8 +90,6 @@ class GraphExchange extends React.Component {
     createGraph() {
         var width = 900,
             height = 900;
-
-        debugger
 
         var force = d3
             .layout
@@ -138,33 +139,35 @@ class GraphExchange extends React.Component {
         
         var clipPath = defs.append('clipPath').attr('id', 'clip-circle')
             .append("circle")
-            .attr("r", 25)
-            .attr("cy",  -50)
+            .attr("r", 52)
+            .attr("cy",  0)
             .attr("cx", 0)
-            .style("stroke", '#000')
+            .attr("stroke", "#ededed")
+            // .attr("fill-opacity", 0.2)
+            // .attr("stroke-opacity", 0.2)
 
         files
             .append("circle")
             .attr("class", "file")
-            .attr("r", 50)
-            .attr("stroke", "#a5abb6")
-            .on("click", (d) => {
-                if(d.name == "Webonise") {
-                   this.setState({ selectedUserChild: d.children });                
-                } else {
-                    this.setState({ selectedDepChild: d.children });
-                }
-            })
+            .attr("r", 52)
+            .attr("stroke", "#ededed")        
+            // .on("click", (d) => {
+            //     if(d.name == "Webonise") {
+            //        this.setState({ selectedUserChild: d.children });                
+            //     } else {
+            //         this.setState({ selectedDepChild: d.children });
+            //     }
+            // })
         files
             .append("foreignObject")
             .text((d) => d.name)
             .attr("x", -48)
             .attr("y", (d) => {
-                var positionY = -10
-                if(d.name === "Webonise") {
-                    positionY = 5
+                var yAxis = -75
+                if(d.name == "Webonise") {
+                    yAxis = 0
                 }
-                return positionY
+                return yAxis
             })
             .attr("width", 95)
             .attr("height", 10)
@@ -173,10 +176,12 @@ class GraphExchange extends React.Component {
         
         files
             .append("image")
-            .attr("width", 50)
-            .attr("height", 50)
-            .attr("x", -25)
-            .attr("y", -75)
+            .attr("width", 104)
+            .attr("height", 104)
+            .attr("x", -52)
+            .attr("y", -52)
+            // .attr("fill-opacity", 0.2)
+            // .attr("stroke-opacity", 0.2)
             .attr("xlink:href", (d) => {
                 var urlPath = ""
                 if(d.src) {
