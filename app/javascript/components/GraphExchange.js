@@ -16,6 +16,7 @@ class GraphExchange extends React.Component {
                     id: 12,
                     name: "Nitin Reddy",
                     department: "Sales",
+                    departmentId: 6,
                     profileImage: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAfZAAAAJGYwOTc3NTQ5LTBiMjEtNDA5MC05YWUyLTAyNGIzMzE2MmY1Zg.jpg"
                 },
                 departments: [{
@@ -49,7 +50,9 @@ class GraphExchange extends React.Component {
                 }]
             },
             selectedUserChild: [],
-            selectedDepChild: [] 
+            selectedDepChild: [],
+            gOpacity: 0.4,
+            selectedDepartment: {} 
         }
         this.createGraph = this.createGraph.bind(this);
         /**
@@ -62,9 +65,6 @@ class GraphExchange extends React.Component {
         this.createGraph()
     }
 
-    /**
-     * Kept for future preferences
-     */
     formatData() {
         var nodes = [], links = [];
         var result = this.state.result;
@@ -125,13 +125,43 @@ class GraphExchange extends React.Component {
             .append("line")
             .attr("class", "link")
             .style("stroke-width", 1);
-
+        debugger;
         var files = svg
             .selectAll(".mainNode")
             .data(graphJson.nodes)
             .enter()
             .append("g")
             .attr("class", "mainNode")
+            .style("opacity", (d) => {
+                // var op = 0.4;
+                this.setState({ gOpacity: 0.5})
+                if(d.name == "Sales" && d.id == this.state.result.user.departmentId || d.name == "Webonise") {
+                    this.state.gOpacity = 1;
+                } else if(d.id == this.state.selectedDepartment.id) {
+                    this.state.gOpacity = 1;
+                } else {
+                    this.state.gOpacity = 0.5;
+                }
+                this.setState(this.state)
+                return this.state.gOpacity
+            })
+            .on("click", (d) => {
+                this.setState({ selectedDepartment: d, gOpacity: 0.5 });                
+                if(d.name == "Sales" && d.id == this.state.result.user.departmentId) {
+                   this.setState({ selectedUserChild: d.children });                
+                } else if(d.id == this.state.selectedDepartment.id) {
+                    this.setState({ 
+                        selectedDepChild: d.children, 
+                        gOpacity: 1,
+                    });
+                }
+                this.setState(this.state); 
+                var opac = this.state.gOpacity;
+                return () => {
+                    var that = this;
+                    d3.select(that).style("opacity", opac)                    
+                }                                          
+            })
 
         var totalNodes = files[0].length;
         
@@ -143,21 +173,12 @@ class GraphExchange extends React.Component {
             .attr("cy",  0)
             .attr("cx", 0)
             .attr("stroke", "#ededed")
-            // .attr("fill-opacity", 0.2)
-            // .attr("stroke-opacity", 0.2)
 
         files
             .append("circle")
             .attr("class", "file")
-            .attr("r", 52)
-            .attr("stroke", "#ededed")        
-            // .on("click", (d) => {
-            //     if(d.name == "Webonise") {
-            //        this.setState({ selectedUserChild: d.children });                
-            //     } else {
-            //         this.setState({ selectedDepChild: d.children });
-            //     }
-            // })
+            .attr("r", 52)        
+            
         files
             .append("foreignObject")
             .text((d) => d.name)
@@ -180,8 +201,6 @@ class GraphExchange extends React.Component {
             .attr("height", 104)
             .attr("x", -52)
             .attr("y", -52)
-            // .attr("fill-opacity", 0.2)
-            // .attr("stroke-opacity", 0.2)
             .attr("xlink:href", (d) => {
                 var urlPath = ""
                 if(d.src) {
@@ -190,6 +209,17 @@ class GraphExchange extends React.Component {
                 return urlPath
             })
             .attr("clip-path", "url(#clip-circle)")
+            .on("click", (d) => {
+                this.setState({ selectedDepartment: d });                
+                if(d.name == "Sales" && d.id == this.state.result.user.departmentId) {
+                   this.setState({ selectedUserChild: d.children });                
+                } else if(d.id == this.state.selectedDepartment.id) {
+                    this.setState({ 
+                        selectedDepChild: d.children, 
+                        gOpacity: 1,
+                    });
+                }
+            })
         
         force.start();
 
