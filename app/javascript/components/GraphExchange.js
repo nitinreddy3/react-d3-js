@@ -262,7 +262,7 @@ class GraphExchange extends React.Component {
                 return radius;
             });
         setTimeout(() => {
-            force.on("tick", function tick() {
+            function tick() {
                 link
                     .attr("x1", function (d) {
                         return d.source.x;
@@ -277,7 +277,7 @@ class GraphExchange extends React.Component {
                         return d.target.y;
                     });
                 files.attr("transform", (d) => 'translate(' + d.x + ',' + d.y + ')')
-            });
+            };
             if(force.alpha() >= .005);
                 setTimeout(tick, 1000);
         }, 1500);

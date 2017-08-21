@@ -41,6 +41,78 @@ class Graph extends React.Component {
                     id: 6,
                     name: "Sales",
                     children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
+                }, {
+                    id: 6,
+                    name: "Sales",
+                    children: [{ name: "kugdfdmar"}, { name: "asdkr"}]                    
                 }]
             },
             selectedUserChild: [],
@@ -94,7 +166,7 @@ class Graph extends React.Component {
             .layout
             .force()
             .charge(-120)
-            .linkDistance(100)
+            .linkDistance(150)
             .size([width, height])
             .start();
 
@@ -137,7 +209,7 @@ class Graph extends React.Component {
         
         var clipPath = defs.append('clipPath').attr('id', 'clip-circle')
             .append("circle")
-            .attr("r", 25)
+            .attr("r", 20)
             .attr("cy",  -50)
             .attr("cx", 0)
             .style("stroke", '#000')
@@ -145,7 +217,7 @@ class Graph extends React.Component {
         files
             .append("circle")
             .attr("class", "file")
-            .attr("r", 50)
+            .attr("r", 20)
             .attr("stroke", "#a5abb6")
             .on("click", (d) => {
                 if(d.name == "Webonise") {
@@ -172,8 +244,8 @@ class Graph extends React.Component {
         
         files
             .append("image")
-            .attr("width", 50)
-            .attr("height", 50)
+            .attr("width", 40)
+            .attr("height", 40)
             .attr("x", -25)
             .attr("y", -75)
             .attr("xlink:href", (d) => {
@@ -229,7 +301,7 @@ class Graph extends React.Component {
 
         
         setTimeout(() => {
-            force.on("tick", () => {
+            function tick() {
                 link
                     .attr("x1", function (d) {
                         return d.source.x;
@@ -244,7 +316,7 @@ class Graph extends React.Component {
                         return d.target.y;
                     });
                 files.attr("transform", (d) => 'translate(' + d.x + ',' + d.y + ')')
-            });
+            };
             if(force.alpha() >= .005);
                 setTimeout(tick, 1000);
         }, 1500);
