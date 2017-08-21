@@ -163,7 +163,7 @@ class GraphExchange extends React.Component {
                 }                                          
             })
 
-        var totalNodes = files[0].length;
+        // var totalNodes = files[0].length;
         
         var defs = files.append("defs").attr('id', "imgdefs");
         
@@ -239,9 +239,10 @@ class GraphExchange extends React.Component {
                 return d.target.y;
             });
 
-        files.attr("cx", function (d) {
-            return d.x;
-        })
+        files
+            .attr("cx", function (d) {
+                return d.x;
+            })
             .attr("cy", function (d) {
                 return d.y;
             })
@@ -261,22 +262,26 @@ class GraphExchange extends React.Component {
 
                 return radius;
             });
-        force.on("tick", function () {
-            link
-                .attr("x1", function (d) {
-                    return d.source.x;
-                })
-                .attr("y1", function (d) {
-                    return d.source.y;
-                })
-                .attr("x2", function (d) {
-                    return d.target.x;
-                })
-                .attr("y2", function (d) {
-                    return d.target.y;
-                });
-            files.attr("transform", (d) => 'translate(' + d.x + ',' + d.y + ')')
-        });
+        setTimeout(() => {
+            force.on("tick", () => {
+                link
+                    .attr("x1", function (d) {
+                        return d.source.x;
+                    })
+                    .attr("y1", function (d) {
+                        return d.source.y;
+                    })
+                    .attr("x2", function (d) {
+                        return d.target.x;
+                    })
+                    .attr("y2", function (d) {
+                        return d.target.y;
+                    });
+                files.attr("transform", (d) => 'translate(' + d.x + ',' + d.y + ')')
+            });
+            if(force.alpha() >= .005);
+                setTimeout(tick, 1000);
+        }, 1500);
     }
 
     render() {

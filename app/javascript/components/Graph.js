@@ -106,6 +106,7 @@ class Graph extends React.Component {
 
         var graphJson = this.formatData();
         var nodes = graphJson.nodes;
+
         force
             .nodes(nodes)
             .links(graphJson.links)
@@ -131,7 +132,7 @@ class Graph extends React.Component {
             .enter()
             .append("g")
             .attr("class", "mainNode")
-
+            
         var totalNodes = files[0].length;
         
         var defs = files.append("defs").attr('id', "imgdefs");
@@ -187,13 +188,13 @@ class Graph extends React.Component {
             .attr("clip-path", "url(#clip-circle)")
         
         force.start();
-
         nodes[0].x = width / 2;
         nodes[0].y = height / 2;
 
-        link.attr("x1", function (d) {
-            return d.source.x;
-        })
+        link
+            .attr("x1", function (d) {
+                return d.source.x;
+            })
             .attr("y1", function (d) {
                 return d.source.y;
             })
@@ -204,9 +205,10 @@ class Graph extends React.Component {
                 return d.target.y;
             });
 
-        files.attr("cx", function (d) {
-            return d.x;
-        })
+        files
+            .attr("cx", function (d) {
+                return d.x;
+            })
             .attr("cy", function (d) {
                 return d.y;
             })
@@ -226,29 +228,37 @@ class Graph extends React.Component {
 
                 return radius;
             });
-        force.on("tick", function () {
-            link
-                .attr("x1", function (d) {
-                    return d.source.x;
-                })
-                .attr("y1", function (d) {
-                    return d.source.y;
-                })
-                .attr("x2", function (d) {
-                    return d.target.x;
-                })
-                .attr("y2", function (d) {
-                    return d.target.y;
-                });
-            files.attr("transform", (d) => 'translate(' + d.x + ',' + d.y + ')')
-        });
+
+        
+        setTimeout(() => {
+            force.on("tick", () => {
+                link
+                    .attr("x1", function (d) {
+                        return d.source.x;
+                    })
+                    .attr("y1", function (d) {
+                        return d.source.y;
+                    })
+                    .attr("x2", function (d) {
+                        return d.target.x;
+                    })
+                    .attr("y2", function (d) {
+                        return d.target.y;
+                    });
+                files.attr("transform", (d) => 'translate(' + d.x + ',' + d.y + ')')
+            });
+            if(force.alpha() >= .005);
+                setTimeout(tick, 1000);
+        }, 1500);
     }
 
+    
     render() {
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
+
                         <div id="theVizness"></div>
                     </div>
                     <div className="col-md-2">
