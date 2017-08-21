@@ -132,8 +132,6 @@ class Graph extends React.Component {
             .enter()
             .append("g")
             .attr("class", "mainNode")
-            
-        var totalNodes = files[0].length;
         
         var defs = files.append("defs").attr('id', "imgdefs");
         

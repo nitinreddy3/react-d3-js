@@ -162,8 +162,6 @@ class GraphExchange extends React.Component {
                     d3.select(that).style("opacity", opac)                    
                 }                                          
             })
-
-        // var totalNodes = files[0].length;
         
         var defs = files.append("defs").attr('id', "imgdefs");
         
@@ -226,6 +224,7 @@ class GraphExchange extends React.Component {
         nodes[0].x = width / 2;
         nodes[0].y = height / 2;
 
+              
         link.attr("x1", function (d) {
             return d.source.x;
         })
@@ -263,7 +262,7 @@ class GraphExchange extends React.Component {
                 return radius;
             });
         setTimeout(() => {
-            force.on("tick", () => {
+            force.on("tick", function tick() {
                 link
                     .attr("x1", function (d) {
                         return d.source.x;
