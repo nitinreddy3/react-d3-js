@@ -10,7 +10,7 @@ var force = d3
 class GraphTemplate extends React.Component {
     componentWillMount() {
         setTimeout(() => {
-            if(force.alpha() >= 0.005) {
+            if (force.alpha() >= 0.005) {
                 force.on('tick', () => {
                     this.forceUpdate()
                 });
@@ -36,7 +36,7 @@ class GraphTemplate extends React.Component {
     }
 
     componentDidMount() {
-        let {nodes, links} = this.props
+        let { nodes, links } = this.props
         force
             .nodes(nodes)
             .links(links)
@@ -57,7 +57,7 @@ class GraphTemplate extends React.Component {
         var nodes = _.map(this.props.nodes, (node) => {
             var transform = 'translate(' + node.x + ',' + node.y + ')';
             return (
-                <g className={node.index === 0 ? "rootFile file" : "file"} key={node.key} transform={transform} cx={node.x} cy={node.y} 
+                <g className={node.index === 0 ? "rootFile file" : "file"} key={node.key} transform={transform} cx={node.x} cy={node.y}
                     opacity={node.opacity} onClick={this.props.selectKpiFromUser.bind(this, node)}>
                     <defs id="imgdefs">
                         <clipPath id="clip-circle">

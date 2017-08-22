@@ -64,15 +64,14 @@ class GraphReactComp extends React.Component {
     }
 
     componentDidMount() {
-        let currentUser = _.findWhere(this.state.nodes, { name: "Puja"});
+        let currentUser = _.findWhere(this.state.nodes, { name: "Puja" });
         this.setState({ currentUserKpi: currentUser.myKpi })
     }
 
     selectKpiFromUser(user, opacity) {
-        let {nodes} = this.state;
+        let { nodes } = this.state;
         nodes = _.map(nodes, (node, key) => {
-            if(node.id == user.id || node.isAnOwner)
-            {
+            if (node.id == user.id || node.isAnOwner) {
                 node.opacity = 1;
             } else {
                 node.opacity = 0.5;
@@ -80,13 +79,13 @@ class GraphReactComp extends React.Component {
             return node;
         });
         this.state.selectedKpi = user.myKpi;
-        this.setState(this.state)        
+        this.setState(this.state)
     }
 
     render() {
         return (
             <div>
-                <GraphTemplate nodes={this.state.nodes} links={this.state.links} selectKpiFromUser={this.selectKpiFromUser}/>
+                <GraphTemplate nodes={this.state.nodes} links={this.state.links} selectKpiFromUser={this.selectKpiFromUser} />
                 <div className="">
 
                 </div>

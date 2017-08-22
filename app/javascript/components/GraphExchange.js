@@ -55,9 +55,6 @@ class GraphExchange extends React.Component {
             selectedDepartment: {} 
         }
         this.createGraph = this.createGraph.bind(this);
-        /**
-         * Kept for future preferences
-         */
         this.formatData = this.formatData.bind(this);
     }
 
