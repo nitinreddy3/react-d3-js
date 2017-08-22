@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Graph from './javascript/components/Graph';
 import GraphExchange from './javascript/components/GraphExchange';
 import GraphWrapper from './javascript/components/GraphWrapper';
+import GraphReactComp from './javascript/components/GraphReactComp';
 import Profile from './javascript/components/Profile';
 import {useRouterHistory, Router, Route, IndexRoute} from 'react-router';
 import {createHashHistory} from 'history';
@@ -18,6 +19,7 @@ const Root = React.createClass({
                         <IndexRoute component={Graph}/>
                     </Route>
                     <Route path="/graph-exchange" component={GraphExchange}></Route>
+                    <Route path="/graph-react" component={GraphReactComp}></Route>
                 </Router>
             </div>
         );

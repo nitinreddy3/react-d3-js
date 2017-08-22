@@ -107,6 +107,7 @@ class GraphExchange extends React.Component {
 
         var graphJson = this.formatData();
         var nodes = graphJson.nodes;
+
         force
             .nodes(nodes)
             .links(graphJson.links)
@@ -125,7 +126,6 @@ class GraphExchange extends React.Component {
             .append("line")
             .attr("class", "link")
             .style("stroke-width", 1);
-        debugger;
         var files = svg
             .selectAll(".mainNode")
             .data(graphJson.nodes)
