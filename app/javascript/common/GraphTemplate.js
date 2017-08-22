@@ -60,7 +60,7 @@ class GraphTemplate extends React.Component {
                 <g className={node.index === 0 ? "rootFile file" : "file"} key={node.key} transform={transform} cx={node.x} cy={node.y}
                     opacity={node.opacity} onClick={this.props.selectKpiFromUser.bind(this, node)}
                     onMouseOver={this.props.showTooltipMouseOver}
-                    onMouseMove={this.props.showToolTipMouseMove}
+                    onMouseMove={this.props.showToolTipMouseMove.bind(this, node)}
                     onMouseOut={this.props.hideToolTipMouseOut}>
                     <defs id="imgdefs">
                         <clipPath id="clip-circle">

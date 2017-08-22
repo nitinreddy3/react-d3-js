@@ -90,8 +90,10 @@ class GraphReactComp extends React.Component {
         this.refs.toolTip.style.visibility = "visible"
     }
 
-    showToolTipMouseMove() {
+    showToolTipMouseMove(node) {
         console.log('moving')
+        this.refs.toolTip.style.top = node.y
+        this.refs.toolTip.style.left = node.x
     }
 
     hideToolTipMouseOut() {
