@@ -7,7 +7,7 @@ class GraphReactComp extends React.Component {
             nodes: [{
                 id: 1,
                 name: "Puja",
-                src: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAfZAAAAJGYwOTc3NTQ5LTBiMjEtNDA5MC05YWUyLTAyNGIzMzE2MmY1Zg.jpg",
+                src: "https://avatars0.githubusercontent.com/u/6252327?v=4&s=460",
                 opacity: 1,
                 myKpi: [
                     { kpiId: 10, kpiName: "Rest" },
@@ -40,7 +40,7 @@ class GraphReactComp extends React.Component {
             }, {
                 id: 4,
                 name: "Webonise",
-                src: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAfZAAAAJGYwOTc3NTQ5LTBiMjEtNDA5MC05YWUyLTAyNGIzMzE2MmY1Zg.jpg",
+                src: "https://avatars0.githubusercontent.com/u/6252327?v=4&s=460",
                 opacity: 1,
                 myKpi: [
                     { kpiId: 19, kpiName: "JJJ" },
@@ -61,6 +61,9 @@ class GraphReactComp extends React.Component {
             currentUserKpi: []
         };
         this.selectKpiFromUser = this.selectKpiFromUser.bind(this)
+        this.showTooltipMouseOver = this.showTooltipMouseOver.bind(this)
+        this.showToolTipMouseMove = this.showToolTipMouseMove.bind(this)
+        this.hideToolTipMouseOut = this.hideToolTipMouseOut.bind(this)
     }
 
     componentDidMount() {
@@ -82,12 +85,29 @@ class GraphReactComp extends React.Component {
         this.setState(this.state)
     }
 
+    showTooltipMouseOver() {
+        console.log("over");
+        this.refs.toolTip.style.visibility = "visible"
+    }
+
+    showToolTipMouseMove() {
+        console.log('moving')
+    }
+
+    hideToolTipMouseOut() {
+        console.log('out')
+        this.refs.toolTip.style.visibility = "hidden"
+    }
+
     render() {
         return (
             <div>
-                <GraphTemplate nodes={this.state.nodes} links={this.state.links} selectKpiFromUser={this.selectKpiFromUser} />
-                <div className="">
-
+                <GraphTemplate nodes={this.state.nodes} links={this.state.links} selectKpiFromUser={this.selectKpiFromUser} 
+                showTooltipMouseOver={this.showTooltipMouseOver}
+                showToolTipMouseMove={this.showToolTipMouseMove}
+                hideToolTipMouseOut={this.hideToolTipMouseOut}/>
+                <div style={{position: "absolute", zIndex: "10", visibility: "hidden"}} ref="toolTip">
+                    <p>Hello World</p>
                 </div>
             </div>
         );
