@@ -90,10 +90,10 @@ class GraphReactComp extends React.Component {
         this.refs.toolTip.style.visibility = "visible"
     }
 
-    showToolTipMouseMove(node) {
+    showToolTipMouseMove(node, event) {
         console.log('moving')
-        this.refs.toolTip.style.top = node.y
-        this.refs.toolTip.style.left = node.x
+        this.refs.toolTip.style.top = event.pageY+"px"
+        this.refs.toolTip.style.left = event.pageX+"px"
     }
 
     hideToolTipMouseOut() {
@@ -104,7 +104,8 @@ class GraphReactComp extends React.Component {
     render() {
         return (
             <div>
-                <GraphTemplate nodes={this.state.nodes} links={this.state.links} selectKpiFromUser={this.selectKpiFromUser} 
+                <GraphTemplate nodes={this.state.nodes} links={this.state.links} 
+                selectKpiFromUser={this.selectKpiFromUser}
                 showTooltipMouseOver={this.showTooltipMouseOver}
                 showToolTipMouseMove={this.showToolTipMouseMove}
                 hideToolTipMouseOut={this.hideToolTipMouseOut}/>

@@ -8,6 +8,12 @@ var force = d3
     .size([width, height])
 
 class GraphTemplate extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+    
     componentWillMount() {
         setTimeout(() => {
             if (force.alpha() >= 0.005) {
