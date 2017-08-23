@@ -109,7 +109,7 @@ class GraphReactComp extends React.Component {
                 showTooltipMouseOver={this.showTooltipMouseOver}
                 showToolTipMouseMove={this.showToolTipMouseMove}
                 hideToolTipMouseOut={this.hideToolTipMouseOut}/>
-                <div style={{position: "absolute", zIndex: "10", visibility: "hidden"}} ref="toolTip">
+                <div className="myToolTip" style={{position: "absolute", zIndex: "10", visibility: "hidden"}} ref="toolTip">
                     <p>Hello World</p>
                 </div>
             </div>
