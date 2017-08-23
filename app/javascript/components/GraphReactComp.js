@@ -9,6 +9,7 @@ class GraphReactComp extends React.Component {
                 name: "Puja",
                 src: "https://avatars0.githubusercontent.com/u/6252327?v=4&s=460",
                 opacity: 1,
+                emailId: "puja@yopmail.com",
                 myKpi: [
                     { kpiId: 10, kpiName: "Rest" },
                     { kpiId: 11, kpiName: "Best" },
@@ -20,6 +21,7 @@ class GraphReactComp extends React.Component {
                 name: "Nitin",
                 src: "https://avatars3.githubusercontent.com/u/2829600?v=4&s=460",
                 opacity: 0.5,
+                emailId: "nitin@yopmail.com",                
                 myKpi: [
                     { kpiId: 13, kpiName: "GHT" },
                     { kpiId: 14, kpiName: "FGS" },
@@ -31,6 +33,7 @@ class GraphReactComp extends React.Component {
                 name: "Peter",
                 src: "https://avatars2.githubusercontent.com/u/110953?v=4&s=460",
                 opacity: 0.5,
+                emailId: "peter@yopmail.com",                
                 myKpi: [
                     { kpiId: 16, kpiName: "HSD" },
                     { kpiId: 17, kpiName: "JSDF" },
@@ -42,6 +45,7 @@ class GraphReactComp extends React.Component {
                 name: "Webonise",
                 src: "https://avatars0.githubusercontent.com/u/6252327?v=4&s=460",
                 opacity: 1,
+                emailId: "Webonise@yopmail.com",                
                 myKpi: [
                     { kpiId: 19, kpiName: "JJJ" },
                     { kpiId: 20, kpiName: "FGG" },
@@ -94,6 +98,7 @@ class GraphReactComp extends React.Component {
         console.log('moving')
         this.refs.toolTip.style.top = event.pageY+"px"
         this.refs.toolTip.style.left = event.pageX+"px"
+        this.setState({ selectedUser: node })
     }
 
     hideToolTipMouseOut() {
@@ -102,6 +107,7 @@ class GraphReactComp extends React.Component {
     }
 
     render() {
+        let {selectedUser} = this.state;
         return (
             <div>
                 <GraphTemplate nodes={this.state.nodes} links={this.state.links} 
@@ -110,7 +116,7 @@ class GraphReactComp extends React.Component {
                 showToolTipMouseMove={this.showToolTipMouseMove}
                 hideToolTipMouseOut={this.hideToolTipMouseOut}/>
                 <div className="myToolTip" style={{position: "absolute", zIndex: "10", visibility: "hidden"}} ref="toolTip">
-                    <p>Hello World</p>
+                    <p>{selectedUser.emailId}</p>
                 </div>
             </div>
         );

@@ -21,7 +21,7 @@ class GraphTemplate extends React.Component {
                     this.forceUpdate()
                 });
             }
-        }, 2000)
+        }, 3000)
     }
 
     componentWillReceiveProps(nextProps) {
